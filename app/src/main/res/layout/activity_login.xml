@@ -30,12 +30,18 @@
                 android:contentDescription="@null"
                 android:src="@drawable/instagram_logo_black" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width=""
+                android:layout_height="">
+
             <EditText
                 android:id="@+id/login_edt_email"
                 style="@style/Theme.InstagramApp.FormEditText"
                 android:autofillHints="@null"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
                 android:id="@+id/login_edt_password"
