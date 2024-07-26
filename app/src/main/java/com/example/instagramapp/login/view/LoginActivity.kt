@@ -1,8 +1,9 @@
 package com.example.instagramapp.login.view
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
-import com.example.instagramapp.R
 import com.example.instagramapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -12,6 +13,29 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.loginEdtEmailInput.error = "Esse e-mail é invalido"
+        val editTextEmail = binding.loginEdtEmail
+        val editTextPassword = binding.loginEdtPassword
+
+        editTextEmail.addTextChangedListener(watcher)
+        editTextPassword.addTextChangedListener(watcher)
+
+        binding.loginBtnEnter.setOnClickListener {
+            binding.loginEdtEmailInput.error = "Esse e-mail é invalido"
+            binding.loginEdtPasswordInput.error = "Senha incorreta"
+        }
+
+    }
+
+    private val watcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            binding.loginBtnEnter.isEnabled = s.toString().isNotEmpty()
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+
     }
 }
