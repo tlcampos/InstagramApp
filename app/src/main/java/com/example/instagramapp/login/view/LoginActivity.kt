@@ -1,6 +1,8 @@
 package com.example.instagramapp.login.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +21,18 @@ class LoginActivity : AppCompatActivity() {
         editTextEmail.addTextChangedListener(watcher)
         editTextPassword.addTextChangedListener(watcher)
 
-        binding.loginBtnEnter.setOnClickListener {
+        val buttonEnter = binding.loginBtnEnter
+
+        buttonEnter.setOnClickListener {
+            buttonEnter.showProgress(true)
+
             binding.loginEdtEmailInput.error = "Esse e-mail é invalido"
+
             binding.loginEdtPasswordInput.error = "Senha incorreta"
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                buttonEnter.showProgress(false)
+            }, 2000)
         }
 
     }
