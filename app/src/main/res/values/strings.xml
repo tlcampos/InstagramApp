@@ -35,7 +35,7 @@ Ao clicar em Avançar, você concorda com nossos
     <string name="take_picture">Tirar foto</string>
     <string name="search_gallery">Escolher na Biblioteca</string>
     <string name="define_photo_profile">Definir uma foto do perfil</string>
-    <string name="jump">Pular</string>
+    <string name="skip">Pular</string>
     <string name="add_photo">Adicionar uma foto</string>
     <string name="home">Home</string>
     <string name="posts">publicações</string>
