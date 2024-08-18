@@ -24,7 +24,6 @@ class RegisterPhotoFragment : Fragment() {
 
         val customDialog = CustomDialog(requireContext())
 
-        //customDialog.setTitle(R.string.app_name)
         customDialog.addButton(R.string.photo, R.string.gallery) {
             when (it.id) {
                 R.string.photo -> {
