@@ -10,5 +10,7 @@
 
     <color name="blue_disabled">#C3E0FA</color>
     <color name="blue_enabled">#3897F0</color>
+    <color name="teal_700">#0097A7</color>
+
 
 </resources>

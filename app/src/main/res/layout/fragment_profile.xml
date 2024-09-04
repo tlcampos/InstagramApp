@@ -120,7 +120,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/profile_nav_tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="8dp"
             android:background="@drawable/top_bottom_border"
             app:labelVisibilityMode="unlabeled"
