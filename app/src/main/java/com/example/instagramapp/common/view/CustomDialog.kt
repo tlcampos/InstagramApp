@@ -12,18 +12,18 @@ import com.example.instagramapp.databinding.DialogCustomBinding
 class CustomDialog(context: Context) : Dialog(context) {
 
     private lateinit var dialogLinearLayout: LinearLayout
-    private lateinit var dialogBinding: DialogCustomBinding
+    private lateinit var binding: DialogCustomBinding
     private lateinit var txtButtons: Array<TextView>
     private lateinit var txtTitle: TextView
     private var titleId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialogBinding = DialogCustomBinding.inflate(layoutInflater)
-        setContentView(dialogBinding.root)
+        binding = DialogCustomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        dialogLinearLayout = dialogBinding.dialogContainer
-        txtTitle = dialogBinding.dialogTitle
+//        dialogLinearLayout = binding.dialogContainer
+//        txtTitle = binding.dialogTitle
     }
 
     override fun setTitle(titleId: Int) {
@@ -48,14 +48,14 @@ class CustomDialog(context: Context) : Dialog(context) {
         super.show()
 
         titleId.let {
-            txtTitle.setText(it!!)
+            binding.dialogTitle.setText(it!!)
         }
 
         for (textView in txtButtons) {
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
             layoutParams.setMargins(30,50,30,50)
 
-            dialogLinearLayout.addView(textView, layoutParams)
+            binding.dialogContainer.addView(textView, layoutParams)
         }
     }
 }
