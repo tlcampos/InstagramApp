@@ -1,33 +1,33 @@
 package com.example.instagramapp.login.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.instagramapp.common.util.TxtWatcher
 import com.example.instagramapp.databinding.ActivityLoginBinding
 import com.example.instagramapp.login.Login
+import com.example.instagramapp.login.view.presentation.LoginPresenter
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
     private lateinit var binding: ActivityLoginBinding
 
+    override lateinit var presenter: Login.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
+        presenter = LoginPresenter(this)
 
         with(binding) {
             loginEdtEmail.addTextChangedListener(watcher)
             loginEdtPassword.addTextChangedListener(watcher)
 
             loginBtnEnter.setOnClickListener {
-                //Chamar o Presenter
-//                Handler(Looper.getMainLooper()).postDelayed({
-//                    loginBtnEnter.showProgress(false)
-//                }, 2000)
+                presenter.login(loginEdtEmail.text.toString(), loginEdtPassword.text.toString())
             }
 
         }
