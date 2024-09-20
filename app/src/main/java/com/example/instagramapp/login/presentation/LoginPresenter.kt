@@ -2,6 +2,7 @@ package com.example.instagramapp.login.presentation
 
 import android.util.Patterns
 import com.example.instagramapp.R
+import com.example.instagramapp.common.model.UserAuth
 import com.example.instagramapp.login.Login
 import com.example.instagramapp.login.data.LoginCallback
 import com.example.instagramapp.login.data.LoginRepository
@@ -13,7 +14,7 @@ class LoginPresenter(
 
     override fun login(email: String, password: String) {
         val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val isPasswordValid = password.length == 8
+        val isPasswordValid = password.length >= 8
 
         if (!isEmailValid) {
             view?.displayEmailFailure(R.string.invalid_email)
@@ -30,7 +31,7 @@ class LoginPresenter(
             view?.showProgress(true)
 
             repository.login(email, password, object : LoginCallback{
-                override fun onSucess() {
+                override fun onSucess(userAuth: UserAuth) {
                     view?.onUserAuthenticated()
                 }
 

@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.instagramapp.common.base.DependecyInjector
+import com.example.instagramapp.common.base.DependencyInjector
 import com.example.instagramapp.common.util.TxtWatcher
 import com.example.instagramapp.databinding.ActivityLoginBinding
 import com.example.instagramapp.login.Login
-import com.example.instagramapp.login.data.FakeDataSource
-import com.example.instagramapp.login.data.LoginRepository
 import com.example.instagramapp.login.presentation.LoginPresenter
 import com.example.instagramapp.main.view.MainActivity
 
@@ -27,10 +25,7 @@ class LoginActivity : AppCompatActivity(), Login.View {
 
         setContentView(binding.root)
 
-
-        //val repository = LoginRepository(FakeDataSource())
-
-        presenter = LoginPresenter(this, DependecyInjector.loginRepository())
+        presenter = LoginPresenter(this, DependencyInjector.loginRepository())
 
         with(binding) {
             loginEdtEmail.addTextChangedListener(watcher)
