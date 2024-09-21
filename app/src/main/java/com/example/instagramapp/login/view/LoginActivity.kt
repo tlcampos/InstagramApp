@@ -10,6 +10,7 @@ import com.example.instagramapp.databinding.ActivityLoginBinding
 import com.example.instagramapp.login.Login
 import com.example.instagramapp.login.presentation.LoginPresenter
 import com.example.instagramapp.main.view.MainActivity
+import com.example.instagramapp.register.view.RegisterActivity
 
 class LoginActivity : AppCompatActivity(), Login.View {
 
@@ -41,7 +42,16 @@ class LoginActivity : AppCompatActivity(), Login.View {
                 presenter.login(loginEdtEmail.text.toString(), loginEdtPassword.text.toString())
             }
 
+            loginTxtRegister.setOnClickListener {
+                goToRegisterScreen()
+            }
+
         }
+    }
+
+    private fun goToRegisterScreen() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onDestroy() {
