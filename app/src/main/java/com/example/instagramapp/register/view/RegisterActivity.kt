@@ -2,10 +2,12 @@ package com.example.instagramapp.register.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.instagramapp.R
 import com.example.instagramapp.databinding.ActivityRegisterBinding
+import com.example.instagramapp.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
 
     private lateinit var binding: ActivityRegisterBinding
 
@@ -17,11 +19,30 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val fragment = RegisterEmailFragment()
+        replaceFragment(fragment)
+    }
 
-        supportFragmentManager.beginTransaction().apply {
-            add(R.id.register_fragment, fragment)
-            commit()
+    override fun goToNameAndPasswordScreen(email: String) {
+        val fragment = RegisterNamePasswordFragment().apply {
+            arguments = Bundle().apply {
+                putString(KEY_EMAIL, email)
+            }
         }
 
+        replaceFragment(fragment)
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        if (supportFragmentManager.findFragmentById(R.id.register_fragment) == null) {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.register_fragment, fragment)
+                commit()
+            }
+        } else {
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.register_fragment, fragment)
+                commit()
+            }
+        }
     }
 }

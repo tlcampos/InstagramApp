@@ -2,10 +2,6 @@ package com.example.instagramapp.register.presentation
 
 import android.util.Patterns
 import com.example.instagramapp.R
-import com.example.instagramapp.common.model.UserAuth
-import com.example.instagramapp.login.Login
-import com.example.instagramapp.login.data.LoginCallback
-import com.example.instagramapp.login.data.LoginRepository
 import com.example.instagramapp.register.RegisterEmail
 import com.example.instagramapp.register.data.RegisterEmailCallback
 import com.example.instagramapp.register.data.RegisterEmailRepository
