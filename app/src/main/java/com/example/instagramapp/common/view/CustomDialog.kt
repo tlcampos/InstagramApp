@@ -12,18 +12,18 @@ import com.example.instagramapp.databinding.DialogCustomBinding
 class CustomDialog(context: Context) : Dialog(context) {
 
     private lateinit var dialogLinearLayout: LinearLayout
-    private lateinit var binding: DialogCustomBinding
-    private lateinit var txtButtons: Array<TextView>
     private lateinit var txtTitle: TextView
+    private lateinit var txtButtons: Array<TextView>
+
     private var titleId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DialogCustomBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.dialog_custom)
 
-//        dialogLinearLayout = binding.dialogContainer
-//        txtTitle = binding.dialogTitle
+        dialogLinearLayout = findViewById(R.id.dialog_container)
+        txtTitle = findViewById(R.id.dialog_title)
+
     }
 
     override fun setTitle(titleId: Int) {
@@ -31,9 +31,10 @@ class CustomDialog(context: Context) : Dialog(context) {
     }
 
     fun addButton(vararg texts: Int, listener: View.OnClickListener){
-        txtButtons = Array(texts.size){
+        txtButtons = Array(texts.size) {
             TextView(context)
         }
+
         texts.forEachIndexed { index, txtId ->
             txtButtons[index].id = txtId
             txtButtons[index].setText(txtId)
@@ -48,14 +49,14 @@ class CustomDialog(context: Context) : Dialog(context) {
         super.show()
 
         titleId.let {
-            binding.dialogTitle.setText(it!!)
+            txtTitle.setText(it!!)
         }
 
         for (textView in txtButtons) {
             val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
             layoutParams.setMargins(30,50,30,50)
 
-            binding.dialogContainer.addView(textView, layoutParams)
+            dialogLinearLayout.addView(textView, layoutParams)
         }
     }
 }

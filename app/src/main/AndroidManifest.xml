@@ -12,10 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramApp"
         tools:targetApi="31">
-        <activity android:name=".main.view.MainActivity">
-        </activity>
-        <activity
-            android:name=".register.view.RegisterActivity"/>
+        <activity android:name=".main.view.MainActivity"></activity>
+        <activity android:name=".register.view.RegisterActivity" />
         <activity
             android:name=".login.view.LoginActivity"
             android:exported="true">

@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import com.example.instagramapp.R
 import com.example.instagramapp.common.view.CustomDialog
 import com.example.instagramapp.databinding.FragmentRegisterPhotoBinding
+import com.example.instagramapp.databinding.FragmentRegisterWelcomeBinding
 
 class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
 
-    var binding: FragmentRegisterPhotoBinding? = null
-
+    private var binding: FragmentRegisterPhotoBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
