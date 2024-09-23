@@ -44,6 +44,7 @@ Ao clicar em Avançar, você concorda com nossos
     <string name="edit_profile">Editar perfil</string>
     <string name="username">username</string>
     <string name="invalid_email">Email inválido</string>
+    <string name="invalid_name">Nome deve conter no mínimo 3 caracteres</string>
     <string name="invalid_password">Senha deve conter no mínimo 8 caracteres</string>
     <string name="password_not_equal">Senha e confirmar senha devem ser iguais.</string>
     <string name="save">Salvar</string>
