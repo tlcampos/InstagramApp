@@ -49,7 +49,9 @@ class CustomDialog(context: Context) : Dialog(context) {
         super.show()
 
         titleId.let {
-            txtTitle.setText(it!!)
+            if (it != null) {
+                txtTitle?.setText(it)
+            }
         }
 
         for (textView in txtButtons) {
