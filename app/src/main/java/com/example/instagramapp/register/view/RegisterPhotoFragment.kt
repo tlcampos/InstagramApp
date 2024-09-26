@@ -25,7 +25,7 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
 
         setFragmentResultListener("cropKey") { requestKey, bundle ->
             val uri = bundle.getParcelable<Uri>(CropperImageFragment.KEY_URI)
-            onCropImageResult(uri!!)
+            onCropImageResult(uri)
             Log.i("Teste", "URI: $uri")
         }
     }
@@ -73,12 +73,12 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
     }
 
     private fun onCropImageResult(uri: Uri?) {
-        if (uri != null){
+        if (uri != null) {
             val bitmap = if (Build.VERSION.SDK_INT >= 28) {
-            val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
-            ImageDecoder.decodeBitmap(source)
-        } else {
-            MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
+                ImageDecoder.decodeBitmap(source)
+            } else {
+                MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
             }
             binding?.registerImgProfile?.setImageBitmap(bitmap)
         }

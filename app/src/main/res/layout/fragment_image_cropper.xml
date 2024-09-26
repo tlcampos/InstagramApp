@@ -28,6 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cropper_btn_cancel"/>
+        app:layout_constraintTop_toBottomOf="@+id/cropper_btn_cancel"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

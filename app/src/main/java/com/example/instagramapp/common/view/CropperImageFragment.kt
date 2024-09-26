@@ -25,8 +25,9 @@ class CropperImageFragment : Fragment(R.layout.fragment_image_cropper) {
 
         binding?.let {
             with(it) {
-                cropperContainner.setAspectRatio(1, 1)
+                cropperContainner.setAspectRatio(1,1)
                 cropperContainner.setFixedAspectRatio(true)
+                cropperContainner.isAutoZoomEnabled = true
 
                 cropperContainner.setImageUriAsync(uri)
 
@@ -35,9 +36,9 @@ class CropperImageFragment : Fragment(R.layout.fragment_image_cropper) {
                 }
 
                 cropperContainner.setOnCropImageCompleteListener { view, result ->
-                    Log.i("Teste", "URI: ${result.uri}")
+                    Log.i("Teste", "nova imagem: ${result.uri}")
 
-                    setFragmentResult("cropKey", bundleOf(KEY_URI to result.uri))
+                    setFragmentResult("cropkey", bundleOf(KEY_URI to result.uri))
 
                     parentFragmentManager.popBackStack()
                 }
