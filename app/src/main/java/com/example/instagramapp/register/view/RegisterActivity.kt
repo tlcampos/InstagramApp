@@ -1,10 +1,14 @@
 package com.example.instagramapp.register.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.instagramapp.R
+import com.example.instagramapp.common.view.CropperImageFragment
+import com.example.instagramapp.common.view.CropperImageFragment.Companion.KEY_URI
 import com.example.instagramapp.databinding.ActivityRegisterBinding
 import com.example.instagramapp.main.view.MainActivity
 import com.example.instagramapp.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
@@ -55,6 +59,20 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
         startActivity(intent)
 
     }
+
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        val fragment = CropperImageFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(KEY_URI, uri)
+            }
+        }
+        replaceFragment(fragment)
+    }
+
+        override fun goToGalleryScreen() {
+            getContent.launch("image/*")
+        }
 
     private fun replaceFragment(fragment: Fragment) {
         if (supportFragmentManager.findFragmentById(R.id.register_fragment) == null) {
