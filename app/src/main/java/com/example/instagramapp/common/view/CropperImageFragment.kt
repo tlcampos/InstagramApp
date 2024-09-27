@@ -38,7 +38,7 @@ class CropperImageFragment : Fragment(R.layout.fragment_image_cropper) {
                 cropperContainner.setOnCropImageCompleteListener { view, result ->
                     Log.i("Teste", "nova imagem: ${result.uri}")
 
-                    setFragmentResult("cropkey", bundleOf(KEY_URI to result.uri))
+                    setFragmentResult("cropKey", bundleOf(KEY_URI to result.uri))
 
                     parentFragmentManager.popBackStack()
                 }
