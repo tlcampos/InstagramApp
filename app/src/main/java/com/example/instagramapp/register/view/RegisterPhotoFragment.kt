@@ -8,17 +8,22 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.example.instagramapp.R
+import com.example.instagramapp.common.base.DependencyInjector
 import com.example.instagramapp.common.view.CropperImageFragment
 import com.example.instagramapp.common.view.CustomDialog
 import com.example.instagramapp.databinding.FragmentRegisterPhotoBinding
+import com.example.instagramapp.register.RegisterPhoto
+import com.example.instagramapp.register.presentation.RegisterPhotoPresenter
 
-class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
+class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo), RegisterPhoto.View {
 
     private var binding: FragmentRegisterPhotoBinding? = null
     private var fragmentAttachListener: FragmentAttachListener? = null
+    override lateinit var presenter: RegisterPhoto.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +39,8 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentRegisterPhotoBinding.bind(view)
+        val repository = DependencyInjector.registerEmailRepository()
+        presenter = RegisterPhotoPresenter(this, repository)
 
         binding?.let {
             with(it) {
@@ -54,6 +61,18 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
         if (context is FragmentAttachListener) {
             fragmentAttachListener = context
         }
+    }
+
+    override fun showProgress(enabled: Boolean) {
+        binding?.registerBtnNext?.showProgress(enabled)
+    }
+
+    override fun onUpdateFailure(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUpdateSuccess() {
+        fragmentAttachListener?.goToMainScreen()
     }
 
     private fun openDialog() {
@@ -81,11 +100,14 @@ class RegisterPhotoFragment : Fragment(R.layout.fragment_register_photo) {
                 MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
             }
             binding?.registerImgProfile?.setImageBitmap(bitmap)
+
+            presenter.updateUser(uri)
         }
     }
 
     override fun onDestroy() {
         binding = null
+        presenter.onDestroy()
         super.onDestroy()
     }
 }
