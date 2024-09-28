@@ -13,6 +13,7 @@ import com.example.instagramapp.R
 import com.example.instagramapp.common.view.CropperImageFragment
 import com.example.instagramapp.common.view.CropperImageFragment.Companion.KEY_URI
 import com.example.instagramapp.databinding.ActivityRegisterBinding
+import com.example.instagramapp.extension.hideKeyboard
 import com.example.instagramapp.main.view.MainActivity
 import com.example.instagramapp.register.view.RegisterNamePasswordFragment.Companion.KEY_EMAIL
 import com.example.instagramapp.register.view.RegisterWelcomeFragment.Companion.KEY_NAME
@@ -131,6 +132,7 @@ class RegisterActivity : AppCompatActivity(), FragmentAttachListener {
                 commit()
             }
         }
+        hideKeyboard()
     }
 
     private fun openImageCropper(uri: Uri) {

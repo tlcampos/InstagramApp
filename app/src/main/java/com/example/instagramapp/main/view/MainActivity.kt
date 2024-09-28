@@ -3,7 +3,6 @@ package com.example.instagramapp.main.view
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsetsController
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.instagramapp.R
@@ -18,12 +17,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        window.insetsController?.setSystemBarsAppearance(
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
-        )
-
-        window.statusBarColor = ContextCompat.getColor(this, R.color.gray)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.setSystemBarsAppearance(
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+            window.statusBarColor = ContextCompat.getColor(this, R.color.gray)
+        }
 
         val toolbar = binding.mainToolbar
         setSupportActionBar(toolbar)

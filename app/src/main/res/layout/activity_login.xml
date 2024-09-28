@@ -105,6 +105,7 @@
         android:background="@color/white"
         android:padding="24dp"
         android:text="@string/does_not_have_account"
+        android:textColor="@color/black"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
