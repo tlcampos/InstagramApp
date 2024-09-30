@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramapp.R
 import com.example.instagramapp.databinding.FragmentHomeBinding
 
-class FragmentHome : Fragment() {
+class HomeFragment : Fragment() {
     private var homeBinding: FragmentHomeBinding? = null
     private val binding get() = homeBinding!!
 

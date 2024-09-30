@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.instagramapp.databinding.FragmentCameraBinding
-import com.example.instagramapp.databinding.FragmentHomeBinding
 
-class FragmentCamera : Fragment() {
+class CameraFragment : Fragment() {
     private var cameraBinding: FragmentCameraBinding? = null
     private val binding get() = cameraBinding!!
 

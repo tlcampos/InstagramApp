@@ -1,4 +1,4 @@
-package com.example.instagramapp.profile.view
+package com.example.instagramapp.search.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,21 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramapp.R
-import com.example.instagramapp.databinding.FragmentProfileBinding
+import com.example.instagramapp.databinding.FragmentSearchBinding
 
-class FragmentProfile : Fragment() {
-    private var profileBinding: FragmentProfileBinding? = null
-    private val binding get() = profileBinding!!
+class SearchFragment : Fragment() {
+    private var searchBinding: FragmentSearchBinding? = null
+    private val binding get() = searchBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileBinding = FragmentProfileBinding.inflate(inflater, container, false)
+        searchBinding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -30,9 +30,9 @@ class FragmentProfile : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val rv = binding.profileRv
-        rv.layoutManager = GridLayoutManager(requireContext(), 3)
-        rv.adapter = PostAdapter()
+        val rv = searchBinding?.searchRv
+        rv?.layoutManager = LinearLayoutManager(requireContext())
+        rv?.adapter = PostAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class FragmentProfile : Fragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
             return PostViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_profile_grid, parent, false)
+                    .inflate(R.layout.item_user_list, parent, false)
             )
         }
 
@@ -64,7 +64,7 @@ class FragmentProfile : Fragment() {
 
         private class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             fun bind(image: Int) {
-               itemView.findViewById<ImageView>(R.id.item_profile_img_grid).setImageResource(image)
+               itemView.findViewById<ImageView>(R.id.search_img_user).setImageResource(image)
             }
         }
     }
