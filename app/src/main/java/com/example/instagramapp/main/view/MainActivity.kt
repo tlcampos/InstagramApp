@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.instagramapp.R
@@ -14,6 +15,7 @@ import com.example.instagramapp.extension.replaceFragment
 import com.example.instagramapp.home.view.HomeFragment
 import com.example.instagramapp.profile.view.ProfileFragment
 import com.example.instagramapp.search.view.SearchFragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -54,7 +56,23 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
 
+    private fun setScrollToolbarEnabled(enabled: Boolean){
+        val params = binding.mainToolbar.layoutParams as AppBarLayout.LayoutParams
+        val coordinatorParams = binding.mainAppBar.layoutParams as CoordinatorLayout.LayoutParams
+
+        if (enabled){
+            params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+            coordinatorParams.behavior = AppBarLayout.Behavior()
+        } else {
+            params.scrollFlags = 0
+            coordinatorParams.behavior = null
+        }
+        binding.mainAppBar.layoutParams = coordinatorParams
+
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var scrollToolbarEnable = false
         when (item.itemId){
             R.id.menu_bottom_home ->{
                 if (currentFragment == homeFragment) return false
@@ -71,8 +89,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_profile ->{
                 if (currentFragment == profileFragment) return false
                 currentFragment = profileFragment
+                scrollToolbarEnable = true
             }
         }
+
+        setScrollToolbarEnabled(scrollToolbarEnable)
+
         currentFragment?.let{
             replaceFragment(R.id.main_fragment, it)
         }
