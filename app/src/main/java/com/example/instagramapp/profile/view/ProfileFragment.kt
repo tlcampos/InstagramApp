@@ -7,37 +7,33 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramapp.R
+import com.example.instagramapp.common.base.BaseFragment
 import com.example.instagramapp.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
-    private var profileBinding: FragmentProfileBinding? = null
-    private val binding get() = profileBinding!!
+class ProfileFragment
+    : BaseFragment<FragmentProfileBinding,Profile.Presenter>(
+    R.layout.fragment_profile
+    , FragmentProfileBinding::bind) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        profileBinding = FragmentProfileBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
-    }
+    override lateinit var presenter: Profile.Presenter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val rv = binding.profileRv
-        rv.layoutManager = GridLayoutManager(requireContext(), 3)
-        rv.adapter = PostAdapter()
+    override fun setUpViews() {
+        val rv = binding?.profileRv
+        rv?.layoutManager = GridLayoutManager(requireContext(), 3)
+        rv?.adapter = PostAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+    override fun onDestroy() {
+        binding = null
+        //presenter.onDestroy()
+        super.onDestroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
