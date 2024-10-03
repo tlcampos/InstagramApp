@@ -1,7 +1,9 @@
-package com.example.instagramapp.profile.view
+package com.example.instagramapp.profile
 
 import com.example.instagramapp.common.base.BasePresenter
 import com.example.instagramapp.common.base.BaseView
+import com.example.instagramapp.common.model.Post
+import com.example.instagramapp.common.model.UserAuth
 
 interface Profile {
 
@@ -11,7 +13,10 @@ interface Profile {
     }
     interface View : BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
-        //Novos Metodos Aqui
+        fun displayUserProfile(userAuth: UserAuth)
+        fun displaRequestFailure(message: String)
+        fun displayEmptyPosts()
+        fun displayFullPosts(posts: List<Post>)
     }
 
 }

@@ -50,4 +50,5 @@ Ao clicar em Avançar, você concorda com nossos
     <string name="logout">Deseja sair?</string>
     <string name="logout_action">Sair</string>
     <string name="cancel">Cancel</string>
+    <string name="empty_list">Nenhum registro encontrado</string>
 </resources>

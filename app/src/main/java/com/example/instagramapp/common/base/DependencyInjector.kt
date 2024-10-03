@@ -2,6 +2,8 @@ package com.example.instagramapp.common.base
 
 import com.example.instagramapp.login.data.FakeDataSource
 import com.example.instagramapp.login.data.LoginRepository
+import com.example.instagramapp.profile.data.ProfileFakeRemoteDataSource
+import com.example.instagramapp.profile.data.ProfileRepository
 import com.example.instagramapp.register.data.FakeRegisterDataSource
 import com.example.instagramapp.register.data.RegisterRepository
 import com.example.instagramapp.splash.data.FakeLocalDataSource
@@ -17,5 +19,9 @@ object DependencyInjector {
     }
     fun registerEmailRepository(): RegisterRepository {
         return RegisterRepository(FakeRegisterDataSource())
+    }
+
+    fun profileRepository(): ProfileRepository {
+        return ProfileRepository(ProfileFakeRemoteDataSource())
     }
 }

@@ -5,6 +5,7 @@ import java.util.UUID
 object Database {
     val usersAuth = hashSetOf<UserAuth>()
     val photos = hashSetOf<Photo>()
+    val posts = hashMapOf<String, Set<Post>>()
 
     var sessionAuth: UserAuth? = null
 
@@ -14,4 +15,5 @@ object Database {
 
         sessionAuth = usersAuth.first()
     }
+
 }
