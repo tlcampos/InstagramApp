@@ -7,10 +7,19 @@ import com.example.instagramapp.common.model.UserAuth
 
 interface Profile {
 
-    interface Presenter : BasePresenter {
-        fun fetchUserProfile()
-        fun fetchUserPosts()
+    interface StateFullPresenter<S:State> : BasePresenter {
+        fun subscribe(state:S?)
+        fun getState():S
     }
+
+    interface State{
+        fun onFetchUserProfile() : UserAuth?
+        fun onFetchUserPosts() : List<Post>?
+    }
+    interface Presenter : StateFullPresenter<State> {
+    }
+
+
     interface View : BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
         fun displayUserProfile(userAuth: UserAuth)
