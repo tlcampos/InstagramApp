@@ -84,11 +84,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         var scrollToolbarEnable = false
 
-        val newFrag: Fragment? = when (item.itemId){
-            R.id.menu_bottom_home ->{
+        val newFrag: Fragment? = when(item.itemId) {
+            R.id.menu_bottom_home -> {
                 HomeFragment()
             }
-            R.id.menu_bottom_profile ->{
+            R.id.menu_bottom_profile -> {
                 ProfileFragment()
             }
             else -> null
@@ -98,13 +98,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val fragmentTag = newFrag?.javaClass?.simpleName
 
-        if (!currFragment?.tag.equals(fragmentTag)){
-          currentFragment?.let { frag ->
-              fragmentSavedState.put(
-                  frag.tag!!,
-                  supportFragmentManager.saveFragmentInstanceState(frag)
-              )
-          }
+        if (!currFragment?.tag.equals(fragmentTag)) {
+            currFragment?.let {  frag ->
+                fragmentSavedState.put(
+                    frag.tag!!,
+                    supportFragmentManager.saveFragmentInstanceState(frag)
+                )
+            }
         }
 
         newFrag?.setInitialSavedState(fragmentSavedState[fragmentTag])
@@ -114,6 +114,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 .addToBackStack(fragmentTag)
                 .commit()
         }
+
+        setScrollToolbarEnabled(scrollToolbarEnable)
 
         return true
     }

@@ -8,12 +8,11 @@ class ProfileState(
     private val posts: List<Post>?,
     private val userAuth: UserAuth?
 ) : Profile.State {
-    override fun onFetchUserProfile(): UserAuth? {
+    override fun fetchUserProfile(): UserAuth? {
         return userAuth
     }
 
-    override fun onFetchUserPosts(): List<Post>? {
+    override fun fetchUserPosts(): List<Post>? {
         return posts
-
     }
 }

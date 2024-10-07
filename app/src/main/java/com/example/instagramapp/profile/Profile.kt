@@ -7,27 +7,23 @@ import com.example.instagramapp.common.model.UserAuth
 
 interface Profile {
 
-    interface StatefulPresenter<S: State> : BasePresenter {
-        fun subscribe(state: S)
+    interface StatefulPresenter<S: State>: BasePresenter {
+        fun subscribe(state: S?)
         fun getState(): S
     }
 
     interface State {
-        fun onFetchUserProfile(): UserAuth?
-        fun onFetchUserPosts(): List<Post>?
+        fun fetchUserProfile() : UserAuth?
+        fun fetchUserPosts()  : List<Post>?
     }
 
-
-    interface Presenter: StatefulPresenter<State> {
-        var state: UserAuth?
-        fun fetchUserProfile()
-        fun fetchUserPosts()
+    interface Presenter : StatefulPresenter<State> {
     }
 
     interface View : BaseView<Presenter> {
         fun showProgress(enabled: Boolean)
         fun displayUserProfile(userAuth: UserAuth)
-        fun displaRequestFailure(message: String)
+        fun displayRequestFailure(message: String)
         fun displayEmptyPosts()
         fun displayFullPosts(posts: List<Post>)
     }
