@@ -7,7 +7,6 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.fragment.app.Fragment
-import com.example.instagramapp.databinding.FragmentProfileBinding
 
 abstract class BaseFragment<T, P : BasePresenter>(
     @LayoutRes layoutId: Int,
@@ -45,7 +44,11 @@ abstract class BaseFragment<T, P : BasePresenter>(
 
         binding = bind(view)
 
+        savedInstanceState?.getString("name")
+
+        if (savedInstanceState != null) {
         setUpViews()
+        }
     }
 
     abstract fun setUpViews()

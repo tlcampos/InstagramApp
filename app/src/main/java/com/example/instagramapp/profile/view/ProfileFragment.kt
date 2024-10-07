@@ -27,39 +27,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         presenter = ProfilePresenter(this, repository)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter.subscribe(
-            if (savedInstanceState != null) {
-                ProfileState(
-                    (savedInstanceState.getParcelableArray("posts") as Array<Post>).toList(),
-                    savedInstanceState.getParcelable("user"))
-            } else {
-                null
-            }
-        )
-    }
-
     override fun setUpViews() {
         val rv = binding?.profileRv
         rv?.layoutManager = GridLayoutManager(requireContext(), 3)
         rv?.adapter = adapter
 
-        //presenter.fetchUserProfile()
+        presenter.fetchUserProfile()
     }
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null){
-            val state = savedInstanceState.getParcelable<UserAuth?>("myState")
+        if (savedInstanceState != null) {
+            val state = savedInstanceState.getParcelable<UserAuth>("myState")
             state?.let {
                 displayUserProfile(it)
             }
         }
         super.onViewStateRestored(savedInstanceState)
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable("user", presenter.getState().onFetchUserProfile())
-        outState.putParcelableArray("posts", presenter.getState().onFetchUserPosts()?.toTypedArray())
+        outState.putParcelable("myState", presenter.state)
         super.onSaveInstanceState(outState)
     }
 
@@ -73,7 +59,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileTxtFollowersCount?.text = userAuth.followersCount.toString()
         binding?.profileTxtUsername?.text = userAuth.name
         binding?.profileTxtBio?.text = "TODO"
-       // presenter.fetchUserPosts()
+        // presenter.fetchUserPosts()
 
     }
 
