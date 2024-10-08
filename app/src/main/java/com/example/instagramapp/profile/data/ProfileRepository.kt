@@ -6,16 +6,29 @@ import com.example.instagramapp.common.model.UserAuth
 
 class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory) {
 
-    fun fetchUserProfile(userUUID: String, callback: RequestCallBack<UserAuth>){
+    fun fetchUserProfile(callback: RequestCallBack<UserAuth>){
         val localDataSource = dataSourceFactory.createLocalDataSource()
         val userAuth = localDataSource.fetchSession()
 
         val dataSource = dataSourceFactory.createFromUser(userAuth)
 
-        dataSource.fetchUserProfile(userUUID, callback)
+        dataSource.fetchUserProfile(userAuth.uuid, object : RequestCallBack<UserAuth>{
+            override fun onSuccess(data: UserAuth) {
+                localDataSource.putUser(data)
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+
+            override fun onComplete() {
+                callback.onComplete()
+            }
+        })
     }
 
     fun fetchUserPosts(userUUID: String, callback: RequestCallBack<List<Post>>){
-        dataSource.fetchUserPosts(userUUID, callback)
+    //    dataSource.fetchUserPosts(userUUID, callback)
     }
 }
