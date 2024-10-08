@@ -9,4 +9,10 @@ interface ProfileDataSource {
     fun fetchUserProfile(userUUID: String, callBack: RequestCallBack<UserAuth>)
 
     fun fetchUserPosts(userUUID: String, callBack: RequestCallBack<List<Post>>)
+
+    fun fetchSession() : UserAuth
+
+    fun putUser(response: UserAuth)
+
+    //fun putPosts(response: List<Post>)
 }
