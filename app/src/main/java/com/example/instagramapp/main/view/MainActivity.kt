@@ -58,6 +58,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             savedInstanceState.getSerializable("fragmentState") as HashMap<String, Fragment.SavedState?>
         }
 
+        homeFragment = HomeFragment()
+        searchFragment = SearchFragment()
+        cameraFragment = CameraFragment()
+        profileFragment = ProfileFragment()
+
         binding.mainBottomNav.setOnNavigationItemSelectedListener(this)
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
@@ -85,12 +90,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         var scrollToolbarEnable = false
 
         val newFrag: Fragment? = when(item.itemId) {
-            R.id.menu_bottom_home -> {
-                HomeFragment()
-            }
-            R.id.menu_bottom_profile -> {
-                ProfileFragment()
-            }
+            R.id.menu_bottom_home -> HomeFragment()
+            R.id.menu_bottom_search -> SearchFragment()
+            R.id.menu_bottom_add -> CameraFragment()
+            R.id.menu_bottom_profile -> ProfileFragment()
             else -> null
         }
 

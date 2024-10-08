@@ -12,7 +12,6 @@ import com.example.instagramapp.common.model.UserAuth
 import com.example.instagramapp.databinding.FragmentProfileBinding
 import com.example.instagramapp.profile.Profile
 import com.example.instagramapp.profile.presentation.ProfilePresenter
-import com.example.instagramapp.profile.presentation.ProfileState
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     R.layout.fragment_profile,
@@ -28,42 +27,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         presenter = ProfilePresenter(this, repository)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        presenter.subscribe(
-            if (savedInstanceState != null) {
-                ProfileState(
-                    (savedInstanceState.getParcelableArray("posts") as Array<Post>).toList(),
-                    savedInstanceState.getParcelable("user")
-                )
-                  } else {
-                null
-            }
-        )
-    }
-
     override fun setUpViews() {
         val rv = binding?.profileRv
         rv?.layoutManager = GridLayoutManager(requireContext(), 3)
         rv?.adapter = adapter
 
-        //presenter.fetchUserProfile()
-    }
-
-//    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-//        if (savedInstanceState != null) {
-//            val state = savedInstanceState.getParcelable<UserAuth>("myState")
-//            state?.let {
-//                displayUserProfile(it)
-//            }
-//        }
-//        super.onViewStateRestored(savedInstanceState)
-//    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable("user", presenter.getState().fetchUserProfile())
-        outState.putParcelableArray("posts", presenter.getState().fetchUserPosts()?.toTypedArray())
-        super.onSaveInstanceState(outState)
+        presenter.fetchUserProfile()
     }
 
     override fun showProgress(enabled: Boolean) {
@@ -76,11 +45,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
         binding?.profileTxtFollowersCount?.text = userAuth.followersCount.toString()
         binding?.profileTxtUsername?.text = userAuth.name
         binding?.profileTxtBio?.text = "TODO"
-        // presenter.fetchUserPosts()
+
+        presenter.fetchUserPosts()
 
     }
 
-    override fun displaRequestFailure(message: String) {
+    override fun displayRequestFailure(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
