@@ -20,7 +20,7 @@ class ProfileFakeRemoteDataSource : ProfileDataSource {
                 callBack.onFailure("Usuário não encontrado")
             }
             callBack.onComplete()
-        }, 2000)
+        }, 1000)
     }
 
     override fun fetchUserPosts(userUUID: String, callBack: RequestCallBack<List<Post>>) {
@@ -31,7 +31,7 @@ class ProfileFakeRemoteDataSource : ProfileDataSource {
             callBack.onSuccess(posts?.toList() ?: emptyList())
 
             callBack.onComplete()
-        }, 2000)
+        }, 1000)
 
     }
 }
