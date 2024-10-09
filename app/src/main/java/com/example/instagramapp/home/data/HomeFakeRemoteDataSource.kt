@@ -4,9 +4,7 @@ import android.os.Handler
 import android.os.Looper
 import com.example.instagramapp.common.base.RequestCallBack
 import com.example.instagramapp.common.model.Database
-import com.example.instagramapp.common.model.Database.feeds
 import com.example.instagramapp.common.model.Post
-import com.example.instagramapp.common.model.UserAuth
 
 class HomeFakeRemoteDataSource : HomeDataSource {
 

@@ -3,7 +3,6 @@ package com.example.instagramapp.home
 import com.example.instagramapp.common.base.BasePresenter
 import com.example.instagramapp.common.base.BaseView
 import com.example.instagramapp.common.model.Post
-import com.example.instagramapp.common.model.UserAuth
 
 interface Home {
 
