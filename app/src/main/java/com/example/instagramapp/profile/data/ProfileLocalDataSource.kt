@@ -7,7 +7,7 @@ import com.example.instagramapp.common.model.UserAuth
 
 class ProfileLocalDataSource(
     private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>,
+    private val postsCache: ProfileCache<List<Post>>
 ) : ProfileDataSource {
 
     override fun fetchUserProfile(userUUID: String, callBack: RequestCallBack<UserAuth>) {
