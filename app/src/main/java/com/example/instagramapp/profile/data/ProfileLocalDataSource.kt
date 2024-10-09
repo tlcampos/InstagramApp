@@ -6,7 +6,8 @@ import com.example.instagramapp.common.model.Post
 import com.example.instagramapp.common.model.UserAuth
 
 class ProfileLocalDataSource(
-    private val profileCache: ProfileCache<UserAuth>
+    private val profileCache: ProfileCache<UserAuth>,
+    private val postsCache: ProfileCache<List<Post>>,
 ) : ProfileDataSource {
 
     override fun fetchUserProfile(userUUID: String, callBack: RequestCallBack<UserAuth>) {
@@ -20,7 +21,13 @@ class ProfileLocalDataSource(
     }
 
     override fun fetchUserPosts(userUUID: String, callBack: RequestCallBack<List<Post>>) {
-        //TODO("Not yet implemented")
+        val posts = postsCache.get(userUUID)
+        if (posts != null) {
+            callBack.onSuccess(posts)
+        } else {
+            callBack.onFailure("posts não existem")
+        }
+        callBack.onComplete()
     }
 
     override fun fetchSession(): UserAuth {
@@ -29,5 +36,8 @@ class ProfileLocalDataSource(
 
     override fun putUser(response: UserAuth) {
         profileCache.put(response)
+    }
+    override fun putPosts(response: List<Post>) {
+        postsCache.put(response)
     }
 }

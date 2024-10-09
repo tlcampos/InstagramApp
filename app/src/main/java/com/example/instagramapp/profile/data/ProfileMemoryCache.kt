@@ -11,7 +11,9 @@ object ProfileMemoryCache : ProfileCache<UserAuth> {
     }
 
     override fun get(key: String): UserAuth? {
-        if (userAuth?.uuid == key) return userAuth
+        if (userAuth?.uuid == key){
+            return userAuth
+        }
         return null
     }
 

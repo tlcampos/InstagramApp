@@ -2,7 +2,6 @@ package com.example.instagramapp.main.view
 
 import android.os.Build
 import android.os.Bundle
-import android.view.AbsSavedState
 import android.view.MenuItem
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
@@ -56,8 +55,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         cameraFragment = CameraFragment()
         profileFragment = ProfileFragment()
 
-        //currentFragment = homeFragment
-
         binding.mainBottomNav.setOnNavigationItemSelectedListener(this)
         binding.mainBottomNav.selectedItemId = R.id.menu_bottom_home
     }
@@ -78,7 +75,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var scrollToolbarEnable = false
+        var scrollToolbarEnabled = false
 
         when(item.itemId) {
             R.id.menu_bottom_home -> {
@@ -96,12 +93,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_bottom_profile -> {
                 if (currentFragment == profileFragment) return false
                 currentFragment = profileFragment
-                scrollToolbarEnable = true
+                scrollToolbarEnabled = true
             }
-
         }
 
-        setScrollToolbarEnabled(scrollToolbarEnable)
+        setScrollToolbarEnabled(scrollToolbarEnabled)
 
         currentFragment?.let {
             replaceFragment(R.id.main_fragment, it)

@@ -10,9 +10,9 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         val localDataSource = dataSourceFactory.createLocalDataSource()
         val userAuth = localDataSource.fetchSession()
 
-        val dataSource = dataSourceFactory.createFromUser(userAuth)
+        val dataSource = dataSourceFactory.createFromUser()
 
-        dataSource.fetchUserProfile(userAuth.uuid, object : RequestCallBack<UserAuth>{
+        dataSource.fetchUserProfile(userAuth.uuid, object : RequestCallBack<UserAuth> {
             override fun onSuccess(data: UserAuth) {
                 localDataSource.putUser(data)
                 callback.onSuccess(data)
@@ -28,7 +28,26 @@ class ProfileRepository(private val dataSourceFactory: ProfileDataSourceFactory)
         })
     }
 
-    fun fetchUserPosts(userUUID: String, callback: RequestCallBack<List<Post>>){
-    //    dataSource.fetchUserPosts(userUUID, callback)
+    fun fetchUserPosts(callback: RequestCallBack<List<Post>>){
+        val localDataSource = dataSourceFactory.createLocalDataSource()
+        val userAuth = localDataSource.fetchSession()
+
+        val dataSource = dataSourceFactory.createFromPosts()
+
+        dataSource.fetchUserPosts(userAuth.uuid, object : RequestCallBack<List<Post>> {
+            override fun onSuccess(data: List<Post>) {
+                localDataSource.putPosts(data)
+                callback.onSuccess(data)
+            }
+
+            override fun onFailure(message: String) {
+                callback.onFailure(message)
+            }
+
+            override fun onComplete() {
+                callback.onComplete()
+            }
+
+        })
     }
 }

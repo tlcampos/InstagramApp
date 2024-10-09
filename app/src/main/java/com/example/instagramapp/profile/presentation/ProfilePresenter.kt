@@ -14,8 +14,7 @@ class ProfilePresenter(
 
     override fun fetchUserProfile() {
         view?.showProgress(true)
-        val userUUID = Database.sessionAuth?.uuid ?: throw RuntimeException("user not found")
-        repository.fetchUserProfile(object : RequestCallBack<UserAuth>{
+        repository.fetchUserProfile(object : RequestCallBack<UserAuth> {
             override fun onSuccess(data: UserAuth) {
                 view?.displayUserProfile(data)
             }
@@ -30,11 +29,9 @@ class ProfilePresenter(
     }
 
     override fun fetchUserPosts() {
-        view?.showProgress(true)
-        val userUUID = Database.sessionAuth?.uuid ?: throw RuntimeException("user not found")
-        repository.fetchUserPosts(userUUID, object : RequestCallBack<List<Post>>{
+        repository.fetchUserPosts(object : RequestCallBack<List<Post>> {
             override fun onSuccess(data: List<Post>) {
-                if (data.isEmpty()){
+                if (data.isEmpty()) {
                     view?.displayEmptyPosts()
                 } else {
                     view?.displayFullPosts(data)
@@ -54,4 +51,5 @@ class ProfilePresenter(
     override fun onDestroy() {
         view = null
     }
+
 }

@@ -1,6 +1,5 @@
 package com.example.instagramapp.profile.view
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,9 +27,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, Profile.Presenter>(
     }
 
     override fun setUpViews() {
-        val rv = binding?.profileRv
-        rv?.layoutManager = GridLayoutManager(requireContext(), 3)
-        rv?.adapter = adapter
+        binding?.profileRv?.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding?.profileRv?.adapter = adapter
 
         presenter.fetchUserProfile()
     }
