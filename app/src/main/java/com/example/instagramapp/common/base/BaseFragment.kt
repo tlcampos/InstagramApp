@@ -46,7 +46,7 @@ abstract class BaseFragment<T, P : BasePresenter>(
 
         savedInstanceState?.getString("name")
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
         setUpViews()
         }
     }
