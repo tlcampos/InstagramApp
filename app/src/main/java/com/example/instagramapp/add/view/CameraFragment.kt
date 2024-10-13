@@ -1,4 +1,4 @@
-package com.example.instagramapp.camera.view
+package com.example.instagramapp.add.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
