@@ -45,14 +45,13 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
         Log.i("Teste","startCamera")
     }
 
-    private val getPermission =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+    private val getPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.permission_denied), Toast.LENGTH_SHORT
+                    R.string.permission_denied, Toast.LENGTH_SHORT
                 ).show()
             }
         }
