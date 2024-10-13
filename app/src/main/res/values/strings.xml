@@ -51,4 +51,5 @@ Ao clicar em Avançar, você concorda com nossos
     <string name="logout_action">Sair</string>
     <string name="cancel">Cancel</string>
     <string name="empty_list">Nenhum registro encontrado</string>
+    <string name="permission_denied">Permissão não concedida. Habilite não configurações do smartphone.</string>
 </resources>

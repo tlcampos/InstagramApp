@@ -4,12 +4,13 @@
 
     <uses-permission android:name="READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission."/>
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
     
-    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <queries>
         <intent>
