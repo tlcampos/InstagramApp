@@ -2,14 +2,16 @@ package com.example.instagramapp.add.view
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.example.instagramapp.R
 import com.example.instagramapp.add.Add
 import com.example.instagramapp.common.base.BaseFragment
 import com.example.instagramapp.databinding.FragmentAddBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
@@ -29,6 +31,21 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
         viewPager?.adapter = adapter
 
         if (tabLayout != null && viewPager != null) {
+            tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    if (tab?.text == getString(adapter.tabs[0])) {
+                        startCamera()
+                    }
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    //TODO("Not yet implemented")
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    //TODO("Not yet implemented")
+                }
+            })
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = getString(adapter.tabs[position])
             }.attach()
@@ -42,7 +59,7 @@ class AddFragment : BaseFragment<FragmentAddBinding, Add.Presenter>(
     }
 
     private fun startCamera() {
-        Log.i("Teste","startCamera")
+        setFragmentResult("camerakey", bundleOf("startCamera" to true))
     }
 
     private val getPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
