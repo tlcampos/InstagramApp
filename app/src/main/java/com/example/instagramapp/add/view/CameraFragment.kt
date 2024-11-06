@@ -14,7 +14,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import com.example.instagramapp.R
 import com.example.instagramapp.common.util.Files
@@ -63,6 +65,7 @@ class CameraFragment : Fragment() {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     val saveUri = Uri.fromFile(photoFile)
                     Log.d("Teste", saveUri.toString())
+                    setFragmentResult("takePhotoKey", bundleOf("uri" to saveUri))
                 }
 
                 override fun onError(exception: ImageCaptureException) {
