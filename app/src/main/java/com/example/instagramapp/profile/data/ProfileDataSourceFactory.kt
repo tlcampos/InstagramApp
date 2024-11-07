@@ -1,11 +1,12 @@
 package com.example.instagramapp.profile.data
 
+import com.example.instagramapp.common.base.Cache
 import com.example.instagramapp.common.model.Post
 import com.example.instagramapp.common.model.UserAuth
 
 class ProfileDataSourceFactory(
-    private val profileCache: ProfileCache<UserAuth>,
-    private val postsCache: ProfileCache<List<Post>>,
+    private val profileCache: Cache<UserAuth>,
+    private val postsCache: Cache<List<Post>>,
 ) {
     fun createLocalDataSource(): ProfileDataSource {
         return ProfileLocalDataSource(profileCache, postsCache)

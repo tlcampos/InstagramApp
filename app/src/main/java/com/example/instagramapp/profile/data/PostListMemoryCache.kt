@@ -1,8 +1,9 @@
 package com.example.instagramapp.profile.data
 
+import com.example.instagramapp.common.base.Cache
 import com.example.instagramapp.common.model.Post
 
-object PostListMemoryCache : ProfileCache<List<Post>> {
+object PostListMemoryCache : Cache<List<Post>> {
 
     private var posts: List<Post>? = null
 
@@ -14,7 +15,7 @@ object PostListMemoryCache : ProfileCache<List<Post>> {
         return posts
     }
 
-    override fun put(data: List<Post>) {
+    override fun put(data: List<Post>?) {
         posts = data
     }
 }
