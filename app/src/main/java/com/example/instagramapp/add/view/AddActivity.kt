@@ -20,6 +20,7 @@ class AddActivity : AppCompatActivity(), Add.View {
 
     private lateinit var binding: ActivityAddBinding
     private lateinit var uri: Uri
+
     override lateinit var presenter: Add.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {

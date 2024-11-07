@@ -10,12 +10,7 @@ import java.util.UUID
 
 class AddFakeRemoteDataSource : AddDataSource {
 
-    override fun createPost(
-        userUUID: String,
-        uri: Uri,
-        caption: String,
-        callback: RequestCallBack<Boolean>
-    ) {
+    override fun createPost( userUUID: String, uri: Uri, caption: String, callback: RequestCallBack<Boolean>) {
         Handler(Looper.getMainLooper()).postDelayed({
 
             var posts = Database.posts[userUUID]
@@ -25,13 +20,7 @@ class AddFakeRemoteDataSource : AddDataSource {
                 Database.posts[userUUID] = posts
             }
 
-            val post = Post(
-                UUID.randomUUID().toString(),
-                uri,
-                caption,
-                System.currentTimeMillis(),
-                Database.sessionAuth!!
-            )
+            val post = Post(UUID.randomUUID().toString(), uri, caption, System.currentTimeMillis(), Database.sessionAuth!!)
 
             posts.add(post)
 
@@ -42,7 +31,7 @@ class AddFakeRemoteDataSource : AddDataSource {
                 Database.followers[userUUID] = followers
             } else {
                 for (follower in followers) {
-                    var feed = Database.feeds[follower]?.add(post)
+                    Database.feeds[follower]?.add(post)
                 }
 
                 Database.feeds[userUUID]?.add(post)
